@@ -10,10 +10,10 @@
   <meta property="og:title" content="ElectroLearn Pro — TVET CDACC Basic Electronics">
   <meta property="og:description" content="Interactive, exam-focused electronics training for TVET & CDACC students.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://yourdomain.com/electrolearn-pro">
-  <meta property="og:image" content="https://yourdomain.com/images/electrolearn-og.png">
+  <meta property="og:url" content="https://basic-electronics.onrender.com/">
+  <meta property="og:image" content="https://basic-electronics.onrender.com/images/electrolearn-og.png">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="https://yourdomain.com/electrolearn-pro" />
+  <link rel="canonical" href="https://basic-electronics.onrender.com/" />
 
   <title>ElectroLearn — TVET CDACC ICT Basic Electronics (Pro)</title>
 
@@ -524,7 +524,7 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
         <div class="card card-slim">
           <h6>Binary Quiz (instant check)</h6>
           <label class="form-label small">Binary</label>
-          <input id="bq" class="form-control form-control-sm mb-1" value="101101" pattern="[01]*">
+          <input id="bq" class="form-control form-control-sm mb-1" value="101101">
           <button class="btn btn-primary btn-sm" id="checkBinaryBtn">Check → Decimal</button>
           <div class="mt-2"><small>Answer: <span id="bqAns">—</span></small></div>
         </div>
@@ -844,10 +844,7 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
   // === Utility Functions ===
   function decConvert() {
     const n = parseInt(document.getElementById('dec').value, 10) || 0;
-    if (n < 0) {
-      document.getElementById('dec').value = 0;
-      return;
-    }
+    if (n < 0) return;
     document.getElementById('decBin').innerText = n.toString(2);
     document.getElementById('decHex').innerText = n.toString(16).toUpperCase();
     document.getElementById('decOct').innerText = n.toString(8);
