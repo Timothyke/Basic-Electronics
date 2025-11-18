@@ -11,27 +11,300 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    :root{--brand:#0d6efd;--muted:#6c757d}
-    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; padding-top:88px;}
-    .section{padding:36px 0}
-    .diagram{max-width:100%;height:auto;border:1px solid #eee;border-radius:8px;}
-    .card-slim{padding:12px}
-    .flashcard{height:160px;display:flex;align-items:center;justify-content:center;font-size:1.15rem}
-    .kbd{background:#f8f9fa;border-radius:6px;padding:.2rem .5rem;border:1px solid #e9ecef}
-    .highlight{background:#fff3cd;padding:10px;border-left:4px solid #ffc107}
-    .converter{min-height:120px}
-    pre.solution{background:#f1f3f5;padding:12px;border-radius:6px}
-    .no-print{display:block}
-    @media print{.no-print{display:none!important}}
+    :root {
+      --brand: #0d6efd;
+      --muted: #6c757d;
+      --success: #198754;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --primary: #0d6efd;
+      --secondary: #6c757d;
+      --dark: #212529;
+      --light: #f8f9fa;
+      --futuristic-bg: #0a0e17;
+      --futuristic-card: #131a2d;
+      --futuristic-accent: #00d4ff;
+      --futuristic-secondary: #7e57c2;
+    }
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      padding-top: 88px;
+      background-color: var(--futuristic-bg);
+      color: #e9ecef;
+      transition: all 0.3s ease;
+    }
+    
+    .section {
+      padding: 36px 0;
+    }
+    
+    .diagram {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #343a40;
+      border-radius: 8px;
+    }
+    
+    .card-slim {
+      padding: 16px;
+      background-color: var(--futuristic-card);
+      border: 1px solid #343a40;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .flashcard {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      background: linear-gradient(135deg, var(--futuristic-card), #1a233a);
+      border-radius: 12px;
+      border: 1px solid var(--futuristic-accent);
+      color: var(--futuristic-accent);
+    }
+    
+    .kbd {
+      background: #343a40;
+      border-radius: 6px;
+      padding: .2rem .5rem;
+      border: 1px solid #495057;
+      color: #fff;
+    }
+    
+    .highlight {
+      background: rgba(255, 193, 7, 0.15);
+      padding: 10px;
+      border-left: 4px solid var(--warning);
+      border-radius: 4px;
+    }
+    
+    .converter {
+      min-height: 120px;
+    }
+    
+    pre.solution {
+      background: #1e2a3a;
+      padding: 12px;
+      border-radius: 6px;
+      color: #e9ecef;
+      border-left: 4px solid var(--futuristic-accent);
+    }
+    
+    .no-print {
+      display: block;
+    }
+    
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+    }
+    
+    /* Gamification styles */
+    .gamification-panel {
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      width: 220px;
+      background: var(--futuristic-card);
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      z-index: 1000;
+      border: 1px solid var(--futuristic-accent);
+    }
+    
+    .progress-ring {
+      transform: rotate(-90deg);
+      width: 80px;
+      height: 80px;
+    }
+    
+    .progress-ring-circle {
+      stroke: var(--futuristic-accent);
+      fill: transparent;
+      stroke-width: 8;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.5s ease;
+    }
+    
+    .xp-display {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--futuristic-accent);
+    }
+    
+    .level-badge {
+      background: linear-gradient(135deg, var(--futuristic-secondary), var(--futuristic-accent));
+      color: white;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+    
+    .quiz-card {
+      background: var(--futuristic-card);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #343a40;
+      transition: all 0.3s ease;
+    }
+    
+    .quiz-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      border-color: var(--futuristic-accent);
+    }
+    
+    .quiz-option {
+      background: #1e2a3a;
+      border: 1px solid #343a40;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .quiz-option:hover {
+      background: #253143;
+      border-color: var(--futuristic-accent);
+    }
+    
+    .quiz-option.correct {
+      background: rgba(25, 135, 84, 0.2);
+      border-color: var(--success);
+    }
+    
+    .quiz-option.incorrect {
+      background: rgba(220, 53, 69, 0.2);
+      border-color: var(--danger);
+    }
+    
+    .achievement-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--warning), #fd7e14);
+      color: var(--dark);
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+    
+    .nav-link {
+      color: rgba(255, 255, 255, 0.8) !important;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--futuristic-accent) !important;
+    }
+    
+    .navbar-brand {
+      color: var(--futuristic-accent) !important;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      color: #fff;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--futuristic-secondary), var(--futuristic-accent));
+      border: none;
+      border-radius: 8px;
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--futuristic-accent), var(--futuristic-secondary));
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+    }
+    
+    .form-control {
+      background-color: #1e2a3a;
+      border: 1px solid #343a40;
+      color: #e9ecef;
+    }
+    
+    .form-control:focus {
+      background-color: #1e2a3a;
+      border-color: var(--futuristic-accent);
+      color: #e9ecef;
+      box-shadow: 0 0 0 0.25rem rgba(0, 212, 255, 0.25);
+    }
+    
+    .bg-light {
+      background-color: #131a2d !important;
+    }
+    
+    /* Animation for correct answers */
+    @keyframes celebrate {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .celebrate {
+      animation: celebrate 0.5s ease;
+    }
+    
+    /* Leaderboard styles */
+    .leaderboard-item {
+      background: var(--futuristic-card);
+      border-radius: 8px;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .leaderboard-position {
+      background: var(--futuristic-accent);
+      color: var(--dark);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    
+    /* Dark mode toggle */
+    .theme-toggle {
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .gamification-panel {
+        position: static;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    }
   </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background:var(--brand)">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background: var(--futuristic-card)">
   <div class="container">
-    <a class="navbar-brand fw-bold" href="#">ElectroLearn Pro</a>
+    <a class="navbar-brand fw-bold" href="#"><i class="fas fa-bolt me-2"></i>ElectroLearn Pro</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -43,18 +316,71 @@
         <li class="nav-item"><a class="nav-link" href="#tools">Practice Tools</a></li>
         <li class="nav-item"><a class="nav-link" href="#quizzes">Quizzes</a></li>
         <li class="nav-item"><a class="nav-link" href="#revision">Revision Cards</a></li>
+        <li class="nav-item">
+          <button class="theme-toggle nav-link" id="themeToggle">
+            <i class="fas fa-moon"></i>
+          </button>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
 
-<header class="bg-light text-center py-5 section">
+<!-- Gamification Panel -->
+<div class="gamification-panel no-print">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="mb-0">Learning Progress</h5>
+    <span class="level-badge">Level <span id="userLevel">1</span></span>
+  </div>
+  
+  <div class="d-flex align-items-center mb-3">
+    <div class="position-relative me-3">
+      <svg class="progress-ring" width="80" height="80">
+        <circle class="progress-ring-circle" stroke-width="8" fill="transparent" r="36" cx="40" cy="40"
+          stroke-dasharray="226.194" stroke-dashoffset="0" id="progressCircle"></circle>
+      </svg>
+      <div class="position-absolute top-50 start-50 translate-middle text-center">
+        <span class="xp-display" id="userXP">0</span>
+        <div class="small">XP</div>
+      </div>
+    </div>
+    <div>
+      <div class="small">Next Level: <span id="nextLevelXP">100</span> XP</div>
+      <div class="small">Quizzes Completed: <span id="quizzesCompleted">0</span>/20</div>
+    </div>
+  </div>
+  
+  <div class="mb-3">
+    <h6>Achievements</h6>
+    <div id="achievementsList">
+      <span class="achievement-badge" id="firstQuizBadge" style="display: none;">First Quiz</span>
+      <span class="achievement-badge" id="halfwayBadge" style="display: none;">Halfway There</span>
+      <span class="achievement-badge" id="perfectScoreBadge" style="display: none;">Perfect Score</span>
+      <span class="achievement-badge" id="masterBadge" style="display: none;">Circuit Master</span>
+    </div>
+  </div>
+  
+  <div>
+    <h6>Leaderboard</h6>
+    <div id="leaderboard">
+      <div class="leaderboard-item">
+        <div class="d-flex align-items-center">
+          <span class="leaderboard-position">1</span>
+          <span class="ms-2">You</span>
+        </div>
+        <span id="leaderboardXP">0 XP</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="text-center py-5 section" style="background: linear-gradient(135deg, var(--futuristic-card), #1a233a);">
   <div class="container">
-    <h1 class="display-5">ElectroLearn — TVET CDACC ICT Basic Electronics (Pro)</h1>
+    <h1 class="display-5"><i class="fas fa-bolt me-2"></i>ElectroLearn — TVET CDACC ICT Basic Electronics (Pro)</h1>
     <p class="lead">Step-by-step lessons, exam-style worked solutions, interactive practice tools, and quick revision — built for TVET/CDACC students and technicians.</p>
     <div class="no-print mt-3">
-      <button class="btn btn-success me-2" onclick="window.print()">Print / Save as PDF</button>
-      <button class="btn btn-outline-light" id="toggleTheme">Toggle compact view</button>
+      <button class="btn btn-success me-2" onclick="window.print()"><i class="fas fa-print me-1"></i>Print / Save as PDF</button>
+      <button class="btn btn-outline-light" id="toggleCompact"><i class="fas fa-compress me-1"></i>Toggle compact view</button>
     </div>
   </div>
 </header>
@@ -65,7 +391,7 @@
   <section id="numbers" class="section">
     <div class="row">
       <div class="col-md-8">
-        <h2>Number Systems — Visual & step-by-step</h2>
+        <h2><i class="fas fa-calculator me-2"></i>Number Systems — Visual & step-by-step</h2>
         <p class="text-muted">Binary, Decimal, Hex, Octal, Two's complement, Gray code — every step shown so you can write answers in exams with confidence.</p>
 
         <h4>Binary → Decimal (Place-value method)</h4>
@@ -141,10 +467,10 @@ Add 1 → 11011011 (This is -37 in 8-bit two's complement)</pre>
   </section>
 
   <!-- Circuits -->
-  <section id="circuits" class="section bg-light">
+  <section id="circuits" class="section" style="background: linear-gradient(135deg, var(--futuristic-card), #1a233a);">
     <div class="row">
       <div class="col-md-7">
-        <h2>Circuits: Ohm's Law, Series & Parallel, Power</h2>
+        <h2><i class="fas fa-project-diagram me-2"></i>Circuits: Ohm's Law, Series & Parallel, Power</h2>
         <p>Simple rules and step-by-step worked examples with exam layout.</p>
 
         <h4>Ohm's law & Power</h4>
@@ -172,28 +498,28 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
         <h5>Visuals & quick interactive</h5>
         <!-- Simple circuit SVG -->
         <svg class="diagram" viewBox="0 0 360 200" aria-label="series-parallel circuit">
-          <rect x="6" y="6" width="348" height="188" rx="8" fill="#fff" stroke="#eee"/>
-          <text x="18" y="28" font-size="14">Series-Parallel Example (visual)</text>
+          <rect x="6" y="6" width="348" height="188" rx="8" fill="#131a2d" stroke="#343a40"/>
+          <text x="18" y="28" font-size="14" fill="#e9ecef">Series-Parallel Example (visual)</text>
 
           <!-- battery -->
-          <rect x="20" y="60" width="18" height="60" fill="#000"/>
-          <rect x="45" y="70" width="6" height="40" fill="#000"/>
-          <line x1="60" y1="90" x2="300" y2="90" stroke="#000" stroke-width="2"/>
+          <rect x="20" y="60" width="18" height="60" fill="#495057"/>
+          <rect x="45" y="70" width="6" height="40" fill="#495057"/>
+          <line x1="60" y1="90" x2="300" y2="90" stroke="#00d4ff" stroke-width="2"/>
 
           <!-- R1 -->
-          <rect x="120" y="70" width="30" height="20" fill="#cfe2ff" stroke="#0d6efd"/>
-          <text x="122" y="86" font-size="12">R1=100Ω</text>
+          <rect x="120" y="70" width="30" height="20" fill="#1e2a3a" stroke="#00d4ff"/>
+          <text x="122" y="86" font-size="12" fill="#e9ecef">R1=100Ω</text>
 
           <!-- parallel branch -->
-          <line x1="170" y1="90" x2="170" y2="50" stroke="#000"/>
-          <rect x="150" y="40" width="40" height="16" fill="#d1e7dd" stroke="#198754"/>
-          <text x="152" y="52" font-size="11">R2=200Ω</text>
+          <line x1="170" y1="90" x2="170" y2="50" stroke="#00d4ff"/>
+          <rect x="150" y="40" width="40" height="16" fill="#1e2a3a" stroke="#00d4ff"/>
+          <text x="152" y="52" font-size="11" fill="#e9ecef">R2=200Ω</text>
 
-          <line x1="170" y1="90" x2="170" y2="150" stroke="#000"/>
-          <rect x="150" y="132" width="40" height="16" fill="#f8d7da" stroke="#dc3545"/>
-          <text x="152" y="144" font-size="11">R3=300Ω</text>
+          <line x1="170" y1="90" x2="170" y2="150" stroke="#00d4ff"/>
+          <rect x="150" y="132" width="40" height="16" fill="#1e2a3a" stroke="#00d4ff"/>
+          <text x="152" y="144" font-size="11" fill="#e9ecef">R3=300Ω</text>
 
-          <line x1="190" y1="90" x2="300" y2="90" stroke="#000"/>
+          <line x1="190" y1="90" x2="300" y2="90" stroke="#00d4ff"/>
         </svg>
 
         <div class="mt-3 card card-slim">
@@ -215,7 +541,7 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
   <section id="semiconductors" class="section">
     <div class="row">
       <div class="col-md-8">
-        <h2>Semiconductors & Diodes — clear, exam-friendly</h2>
+        <h2><i class="fas fa-microchip me-2"></i>Semiconductors & Diodes — clear, exam-friendly</h2>
         <p>PN junction behaviour, forward/reverse bias, diode equation, and simple transistor role explanation.</p>
 
         <h4>Diode I-V curve quick points</h4>
@@ -238,10 +564,10 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
   </section>
 
   <!-- Tools -->
-  <section id="tools" class="section bg-light">
+  <section id="tools" class="section" style="background: linear-gradient(135deg, var(--futuristic-card), #1a233a);">
     <div class="row">
       <div class="col-md-6">
-        <h3>Practice Tools — Interactive</h3>
+        <h3><i class="fas fa-tools me-2"></i>Practice Tools — Interactive</h3>
         <div class="card card-slim mb-3">
           <h6>LED Resistor Calculator</h6>
           <label class="form-label small">Supply Voltage V<sub>sup</sub></label>
@@ -290,7 +616,7 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
 
   <!-- Quizzes and Past Papers -->
   <section id="quizzes" class="section">
-    <h2>Quizzes & Short Past-Paper Questions</h2>
+    <h2><i class="fas fa-tasks me-2"></i>Quizzes & Short Past-Paper Questions</h2>
     <p>Use these as 10–20 minute practice tasks. Answer then click check to see worked solutions and marking points.</p>
 
     <div class="row">
@@ -322,6 +648,16 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
     </div>
 
     <hr/>
+    
+    <!-- Enhanced Quiz Section with 20+ Quizzes -->
+    <h3 class="mt-5">Interactive Quizzes with Full Worked Solutions</h3>
+    <p class="text-muted">Complete these quizzes to earn XP and level up!</p>
+    
+    <div class="row" id="quizContainer">
+      <!-- Quizzes will be dynamically inserted here -->
+    </div>
+
+    <hr/>
     <h5>Sample short past paper (timed 60 minutes)</h5>
     <ol>
       <li>Define voltage, current, resistance. (3 marks)</li>
@@ -334,8 +670,8 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
   </section>
 
   <!-- Revision Cards -->
-  <section id="revision" class="section bg-light">
-    <h2>Revision Cards — quick reference</h2>
+  <section id="revision" class="section" style="background: linear-gradient(135deg, var(--futuristic-card), #1a233a);">
+    <h2><i class="fas fa-layer-group me-2"></i>Revision Cards — quick reference</h2>
     <div class="row">
       <div class="col-md-4">
         <div class="card card-slim">
@@ -373,7 +709,7 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
 
   <!-- Tech & Cybersecurity links -->
   <section id="techlinks" class="section">
-    <h2>Practical Tech & Cybersecurity Connections</h2>
+    <h2><i class="fas fa-shield-alt me-2"></i>Practical Tech & Cybersecurity Connections</h2>
     <p>How basic electronics appears in IT & security:</p>
     <ul>
       <li><strong>Power supplies</strong> — ensure correct voltage rails for servers and routers; know how to size capacitors for smoothing.</li>
@@ -385,7 +721,7 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
 
 </main>
 
-<footer class="bg-white py-4 mt-4">
+<footer class="py-4 mt-4" style="background: var(--futuristic-card);">
   <div class="container text-center text-muted">
     <small>© 2025 ElectroLearn Pro — TVET/CDACC exam-ready materials. Add your past papers and I will embed full worked answers.</small>
   </div>
@@ -394,6 +730,359 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+  // Quiz data with questions, options, answers, and explanations
+  const quizData = [
+    {
+      id: 1,
+      category: "Number Systems",
+      question: "Convert 230₁₀ to binary.",
+      options: ["11100110", "11100111", "11101010", "11101100"],
+      correct: 0,
+      explanation: "230 ÷ 2 = 115 R0, 115 ÷ 2 = 57 R1, 57 ÷ 2 = 28 R1, 28 ÷ 2 = 14 R0, 14 ÷ 2 = 7 R0, 7 ÷ 2 = 3 R1, 3 ÷ 2 = 1 R1, 1 ÷ 2 = 0 R1. Reading remainders from bottom: 11100110₂"
+    },
+    {
+      id: 2,
+      category: "Number Systems",
+      question: "Represent -18 in 8-bit two's complement.",
+      options: ["11101101", "11101110", "11101111", "11110000"],
+      correct: 1,
+      explanation: "18 in binary: 00010010 → invert: 11101101 → add 1: 11101110"
+    },
+    {
+      id: 3,
+      category: "Number Systems",
+      question: "What is 0x7F in decimal?",
+      options: ["127", "126", "128", "255"],
+      correct: 0,
+      explanation: "0x7F = 7×16 + 15 = 112 + 15 = 127"
+    },
+    {
+      id: 4,
+      category: "Circuits",
+      question: "A 12V battery feeds a 240Ω resistor. Find current and power.",
+      options: ["0.05A, 0.6W", "0.06A, 0.72W", "0.04A, 0.48W", "0.03A, 0.36W"],
+      correct: 0,
+      explanation: "I = V/R = 12/240 = 0.05A, P = V×I = 12×0.05 = 0.6W"
+    },
+    {
+      id: 5,
+      category: "Circuits",
+      question: "Find equivalent resistance of 150Ω || 300Ω.",
+      options: ["100Ω", "150Ω", "200Ω", "50Ω"],
+      correct: 0,
+      explanation: "R_eq = (150×300)/(150+300) = 45000/450 = 100Ω"
+    },
+    {
+      id: 6,
+      category: "Circuits",
+      question: "Calculate power dissipated in a 100Ω resistor with 0.5A current.",
+      options: ["25W", "50W", "100W", "200W"],
+      correct: 0,
+      explanation: "P = I²R = (0.5)² × 100 = 0.25 × 100 = 25W"
+    },
+    {
+      id: 7,
+      category: "Circuits",
+      question: "Three 60Ω resistors in parallel. What is the equivalent resistance?",
+      options: ["20Ω", "60Ω", "180Ω", "30Ω"],
+      correct: 0,
+      explanation: "1/R_eq = 1/60 + 1/60 + 1/60 = 3/60 = 1/20 → R_eq = 20Ω"
+    },
+    {
+      id: 8,
+      category: "Circuits",
+      question: "A circuit has 10V supply and draws 2A. What is the resistance?",
+      options: ["5Ω", "10Ω", "20Ω", "2Ω"],
+      correct: 0,
+      explanation: "R = V/I = 10/2 = 5Ω"
+    },
+    {
+      id: 9,
+      category: "Semiconductors",
+      question: "What is the typical forward voltage drop for a silicon diode?",
+      options: ["0.3V", "0.7V", "1.2V", "2.0V"],
+      correct: 1,
+      explanation: "Silicon diodes typically have a forward voltage drop of 0.6-0.7V"
+    },
+    {
+      id: 10,
+      category: "Semiconductors",
+      question: "Which diode is designed to operate in reverse breakdown region?",
+      options: ["LED", "Zener diode", "Schottky diode", "Varactor diode"],
+      correct: 1,
+      explanation: "Zener diodes are specifically designed to operate in the reverse breakdown region for voltage regulation"
+    },
+    {
+      id: 11,
+      category: "Semiconductors",
+      question: "In an NPN transistor, the base-emitter junction is:",
+      options: ["Reverse biased", "Forward biased", "Open", "Shorted"],
+      correct: 1,
+      explanation: "For an NPN transistor to operate in active mode, the base-emitter junction must be forward biased"
+    },
+    {
+      id: 12,
+      category: "Number Systems",
+      question: "Convert 10110101₂ to decimal.",
+      options: ["181", "182", "183", "180"],
+      correct: 0,
+      explanation: "1×128 + 0×64 + 1×32 + 1×16 + 0×8 + 1×4 + 0×2 + 1×1 = 128+32+16+4+1 = 181"
+    },
+    {
+      id: 13,
+      category: "Number Systems",
+      question: "What is the two's complement range for 8-bit numbers?",
+      options: ["-127 to +128", "-128 to +127", "-256 to +255", "0 to 255"],
+      correct: 1,
+      explanation: "8-bit two's complement range is -128 to +127"
+    },
+    {
+      id: 14,
+      category: "Circuits",
+      question: "Calculate voltage across a 50Ω resistor with 0.1A current.",
+      options: ["5V", "10V", "15V", "20V"],
+      correct: 0,
+      explanation: "V = I×R = 0.1×50 = 5V"
+    },
+    {
+      id: 15,
+      category: "Circuits",
+      question: "A 100W bulb operates at 230V. What is its resistance?",
+      options: ["529Ω", "629Ω", "729Ω", "829Ω"],
+      correct: 0,
+      explanation: "P = V²/R → R = V²/P = (230)²/100 = 52900/100 = 529Ω"
+    },
+    {
+      id: 16,
+      category: "Circuits",
+      question: "Three 30Ω resistors in series. What is the equivalent resistance?",
+      options: ["30Ω", "60Ω", "90Ω", "10Ω"],
+      correct: 2,
+      explanation: "R_eq = R1 + R2 + R3 = 30 + 30 + 30 = 90Ω"
+    },
+    {
+      id: 17,
+      category: "Semiconductors",
+      question: "Which material is commonly used for making semiconductors?",
+      options: ["Copper", "Silicon", "Aluminum", "Gold"],
+      correct: 1,
+      explanation: "Silicon is the most commonly used material for semiconductor devices"
+    },
+    {
+      id: 18,
+      category: "Semiconductors",
+      question: "What is the main function of a rectifier diode?",
+      options: ["Amplify signals", "Convert AC to DC", "Regulate voltage", "Store charge"],
+      correct: 1,
+      explanation: "Rectifier diodes are used to convert alternating current (AC) to direct current (DC)"
+    },
+    {
+      id: 19,
+      category: "Number Systems",
+      question: "Convert 0xFF to decimal.",
+      options: ["255", "256", "254", "253"],
+      correct: 0,
+      explanation: "0xFF = 15×16 + 15 = 240 + 15 = 255"
+    },
+    {
+      id: 20,
+      category: "Number Systems",
+      question: "What is the binary equivalent of 0x2A?",
+      options: ["00101010", "00101011", "00101100", "00101101"],
+      correct: 0,
+      explanation: "0x2A = 2×16 + 10 = 32 + 10 = 42 → 42 in binary: 32+8+2 = 00101010"
+    }
+  ];
+
+  // User progress data
+  let userProgress = {
+    xp: 0,
+    level: 1,
+    nextLevelXP: 100,
+    quizzesCompleted: 0,
+    achievements: {
+      firstQuiz: false,
+      halfway: false,
+      perfectScore: false,
+      master: false
+    },
+    quizScores: {}
+  };
+
+  // Load progress from localStorage
+  function loadProgress() {
+    const saved = localStorage.getItem('electroLearnProgress');
+    if (saved) {
+      userProgress = JSON.parse(saved);
+      updateProgressUI();
+    }
+  }
+
+  // Save progress to localStorage
+  function saveProgress() {
+    localStorage.setItem('electroLearnProgress', JSON.stringify(userProgress));
+  }
+
+  // Update progress UI
+  function updateProgressUI() {
+    document.getElementById('userXP').textContent = userProgress.xp;
+    document.getElementById('userLevel').textContent = userProgress.level;
+    document.getElementById('nextLevelXP').textContent = userProgress.nextLevelXP;
+    document.getElementById('quizzesCompleted').textContent = userProgress.quizzesCompleted;
+    document.getElementById('leaderboardXP').textContent = userProgress.xp + ' XP';
+    
+    // Update progress circle
+    const progressPercent = (userProgress.xp / userProgress.nextLevelXP) * 100;
+    const circumference = 226.194; // 2 * π * 36
+    const offset = circumference - (progressPercent / 100) * circumference;
+    document.getElementById('progressCircle').style.strokeDashoffset = offset;
+    
+    // Update achievements
+    if (userProgress.achievements.firstQuiz) {
+      document.getElementById('firstQuizBadge').style.display = 'inline-block';
+    }
+    if (userProgress.achievements.halfway) {
+      document.getElementById('halfwayBadge').style.display = 'inline-block';
+    }
+    if (userProgress.achievements.perfectScore) {
+      document.getElementById('perfectScoreBadge').style.display = 'inline-block';
+    }
+    if (userProgress.achievements.master) {
+      document.getElementById('masterBadge').style.display = 'inline-block';
+    }
+  }
+
+  // Add XP and check for level up
+  function addXP(amount) {
+    userProgress.xp += amount;
+    
+    // Check for level up
+    if (userProgress.xp >= userProgress.nextLevelXP) {
+      userProgress.level++;
+      userProgress.nextLevelXP = Math.floor(userProgress.nextLevelXP * 1.5);
+      
+      // Show level up notification
+      showNotification(`Level Up! You're now Level ${userProgress.level}`, 'success');
+    }
+    
+    // Update achievements
+    if (userProgress.quizzesCompleted >= 1 && !userProgress.achievements.firstQuiz) {
+      userProgress.achievements.firstQuiz = true;
+      showNotification('Achievement Unlocked: First Quiz!', 'info');
+    }
+    
+    if (userProgress.quizzesCompleted >= 10 && !userProgress.achievements.halfway) {
+      userProgress.achievements.halfway = true;
+      showNotification('Achievement Unlocked: Halfway There!', 'info');
+    }
+    
+    if (userProgress.quizzesCompleted >= 20 && !userProgress.achievements.master) {
+      userProgress.achievements.master = true;
+      showNotification('Achievement Unlocked: Circuit Master!', 'info');
+    }
+    
+    saveProgress();
+    updateProgressUI();
+  }
+
+  // Show notification
+  function showNotification(message, type) {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+    notification.style.top = '20px';
+    notification.style.right = '20px';
+    notification.style.zIndex = '1050';
+    notification.innerHTML = `
+      ${message}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.parentNode.removeChild(notification);
+      }
+    }, 5000);
+  }
+
+  // Render quizzes
+  function renderQuizzes() {
+    const container = document.getElementById('quizContainer');
+    container.innerHTML = '';
+    
+    quizData.forEach(quiz => {
+      const isCompleted = userProgress.quizScores[quiz.id];
+      const card = document.createElement('div');
+      card.className = 'col-md-6 col-lg-4';
+      card.innerHTML = `
+        <div class="quiz-card ${isCompleted ? 'border-success' : ''}">
+          <div class="d-flex justify-content-between align-items-start mb-2">
+            <span class="badge bg-primary">${quiz.category}</span>
+            ${isCompleted ? '<span class="badge bg-success"><i class="fas fa-check"></i></span>' : ''}
+          </div>
+          <h6>${quiz.question}</h6>
+          <div class="quiz-options">
+            ${quiz.options.map((option, index) => `
+              <div class="quiz-option" onclick="checkAnswer(${quiz.id}, ${index})">
+                ${String.fromCharCode(65 + index)}) ${option}
+              </div>
+            `).join('')}
+          </div>
+          <div id="explanation-${quiz.id}" class="mt-2" style="display: none;">
+            <div class="alert alert-info">
+              <strong>Explanation:</strong> ${quiz.explanation}
+            </div>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // Check answer
+  function checkAnswer(quizId, selectedIndex) {
+    const quiz = quizData.find(q => q.id === quizId);
+    const explanationEl = document.getElementById(`explanation-${quizId}`);
+    
+    // Mark if this is the first time completing this quiz
+    const firstTime = !userProgress.quizScores[quizId];
+    
+    if (selectedIndex === quiz.correct) {
+      // Correct answer
+      const optionEls = explanationEl.parentElement.querySelectorAll('.quiz-option');
+      optionEls[selectedIndex].classList.add('correct', 'celebrate');
+      
+      // Add XP if first time
+      if (firstTime) {
+        userProgress.quizzesCompleted++;
+        userProgress.quizScores[quizId] = true;
+        addXP(10);
+        
+        // Check for perfect score achievement
+        if (userProgress.quizzesCompleted === quizData.length && !userProgress.achievements.perfectScore) {
+          userProgress.achievements.perfectScore = true;
+          showNotification('Achievement Unlocked: Perfect Score!', 'info');
+        }
+      }
+      
+      showNotification('Correct! +10 XP', 'success');
+    } else {
+      // Incorrect answer
+      const optionEls = explanationEl.parentElement.querySelectorAll('.quiz-option');
+      optionEls[selectedIndex].classList.add('incorrect');
+      optionEls[quiz.correct].classList.add('correct');
+      showNotification('Incorrect. Try again!', 'danger');
+    }
+    
+    // Show explanation
+    explanationEl.style.display = 'block';
+    
+    saveProgress();
+  }
+
   // small utilities
   function decConvert(){
     const n = parseInt(document.getElementById('dec').value,10) || 0;
@@ -472,11 +1161,43 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
   }
 
   // compact view toggle
-  document.getElementById('toggleTheme').addEventListener('click',()=>{
+  document.getElementById('toggleCompact').addEventListener('click',()=>{
     document.body.classList.toggle('compact');
     document.querySelectorAll('.diagram').forEach(d=>d.style.maxHeight = document.body.classList.contains('compact') ? '200px' : 'none');
   });
 
+  // Theme toggle
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    if (document.body.style.getPropertyValue('--futuristic-bg') === '#0a0e17') {
+      // Switch to light theme
+      document.body.style.setProperty('--futuristic-bg', '#f8f9fa');
+      document.body.style.setProperty('--futuristic-card', '#ffffff');
+      document.body.style.setProperty('--futuristic-accent', '#0d6efd');
+      document.body.style.setProperty('--futuristic-secondary', '#6f42c1');
+      document.body.style.color = '#212529';
+      document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(el => {
+        el.style.color = '#212529';
+      });
+      document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i>';
+    } else {
+      // Switch to dark theme
+      document.body.style.setProperty('--futuristic-bg', '#0a0e17');
+      document.body.style.setProperty('--futuristic-card', '#131a2d');
+      document.body.style.setProperty('--futuristic-accent', '#00d4ff');
+      document.body.style.setProperty('--futuristic-secondary', '#7e57c2');
+      document.body.style.color = '#e9ecef';
+      document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(el => {
+        el.style.color = '#fff';
+      });
+      document.getElementById('themeToggle').innerHTML = '<i class="fas fa-moon"></i>';
+    }
+  });
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+    loadProgress();
+    renderQuizzes();
+  });
 </script>
 </body>
 </html>
