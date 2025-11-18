@@ -3,6 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Master TVET/CDACC ICT Basic Electronics with ElectroLearn Pro: interactive lessons on number systems, circuits, semiconductors, and practice quizzes with instant feedback.">
+  <meta name="keywords" content="TVET electronics, CDACC ICT, binary conversion, Ohm's law, two's complement, diode basics, NPN transistor, LED resistor calculator">
+  <meta name="author" content="ElectroLearn Pro">
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="ElectroLearn Pro — TVET CDACC Basic Electronics">
+  <meta property="og:description" content="Interactive, exam-focused electronics training for TVET & CDACC students.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com/electrolearn-pro">
+  <meta property="og:image" content="https://yourdomain.com/images/electrolearn-og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://yourdomain.com/electrolearn-pro" />
+
   <title>ElectroLearn — TVET CDACC ICT Basic Electronics (Pro)</title>
 
   <!-- Bootstrap CSS -->
@@ -10,10 +22,9 @@
   <!-- KaTeX -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
   <style>
     :root {
       --brand: #0d6efd;
@@ -30,7 +41,6 @@
       --futuristic-accent: #00d4ff;
       --futuristic-secondary: #7e57c2;
     }
-    
     body {
       font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       padding-top: 88px;
@@ -38,18 +48,16 @@
       color: #e9ecef;
       transition: all 0.3s ease;
     }
-    
     .section {
       padding: 36px 0;
     }
-    
     .diagram {
       max-width: 100%;
       height: auto;
       border: 1px solid #343a40;
       border-radius: 8px;
+      background: var(--futuristic-card);
     }
-    
     .card-slim {
       padding: 16px;
       background-color: var(--futuristic-card);
@@ -57,7 +65,6 @@
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
-    
     .flashcard {
       height: 160px;
       display: flex;
@@ -69,7 +76,6 @@
       border: 1px solid var(--futuristic-accent);
       color: var(--futuristic-accent);
     }
-    
     .kbd {
       background: #343a40;
       border-radius: 6px;
@@ -77,36 +83,38 @@
       border: 1px solid #495057;
       color: #fff;
     }
-    
     .highlight {
       background: rgba(255, 193, 7, 0.15);
       padding: 10px;
       border-left: 4px solid var(--warning);
       border-radius: 4px;
     }
-    
     .converter {
       min-height: 120px;
     }
-    
     pre.solution {
       background: #1e2a3a;
       padding: 12px;
       border-radius: 6px;
       color: #e9ecef;
       border-left: 4px solid var(--futuristic-accent);
+      overflow-x: auto;
     }
-    
     .no-print {
       display: block;
     }
-    
     @media print {
       .no-print {
         display: none !important;
       }
+      body {
+        padding-top: 0;
+        background: white;
+        color: black;
+      }
+      h1, h2, h3, h4, h5, h6 { color: black !important; }
     }
-    
+
     /* Gamification styles */
     .gamification-panel {
       position: fixed;
@@ -120,13 +128,11 @@
       z-index: 1000;
       border: 1px solid var(--futuristic-accent);
     }
-    
     .progress-ring {
       transform: rotate(-90deg);
       width: 80px;
       height: 80px;
     }
-    
     .progress-ring-circle {
       stroke: var(--futuristic-accent);
       fill: transparent;
@@ -134,13 +140,11 @@
       stroke-linecap: round;
       transition: stroke-dashoffset 0.5s ease;
     }
-    
     .xp-display {
       font-size: 1.2rem;
       font-weight: bold;
       color: var(--futuristic-accent);
     }
-    
     .level-badge {
       background: linear-gradient(135deg, var(--futuristic-secondary), var(--futuristic-accent));
       color: white;
@@ -149,7 +153,6 @@
       font-size: 0.9rem;
       font-weight: bold;
     }
-    
     .quiz-card {
       background: var(--futuristic-card);
       border-radius: 12px;
@@ -158,13 +161,11 @@
       border: 1px solid #343a40;
       transition: all 0.3s ease;
     }
-    
     .quiz-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
       border-color: var(--futuristic-accent);
     }
-    
     .quiz-option {
       background: #1e2a3a;
       border: 1px solid #343a40;
@@ -174,22 +175,18 @@
       cursor: pointer;
       transition: all 0.2s ease;
     }
-    
     .quiz-option:hover {
       background: #253143;
       border-color: var(--futuristic-accent);
     }
-    
     .quiz-option.correct {
       background: rgba(25, 135, 84, 0.2);
       border-color: var(--success);
     }
-    
     .quiz-option.incorrect {
       background: rgba(220, 53, 69, 0.2);
       border-color: var(--danger);
     }
-    
     .achievement-badge {
       display: inline-block;
       background: linear-gradient(135deg, var(--warning), #fd7e14);
@@ -200,65 +197,51 @@
       margin-right: 5px;
       margin-bottom: 5px;
     }
-    
     .nav-link {
       color: rgba(255, 255, 255, 0.8) !important;
       transition: color 0.3s ease;
     }
-    
     .nav-link:hover {
       color: var(--futuristic-accent) !important;
     }
-    
     .navbar-brand {
       color: var(--futuristic-accent) !important;
     }
-    
     h1, h2, h3, h4, h5, h6 {
       color: #fff;
     }
-    
     .btn-primary {
       background: linear-gradient(135deg, var(--futuristic-secondary), var(--futuristic-accent));
       border: none;
       border-radius: 8px;
     }
-    
     .btn-primary:hover {
       background: linear-gradient(135deg, var(--futuristic-accent), var(--futuristic-secondary));
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
     }
-    
     .form-control {
       background-color: #1e2a3a;
       border: 1px solid #343a40;
       color: #e9ecef;
     }
-    
     .form-control:focus {
       background-color: #1e2a3a;
       border-color: var(--futuristic-accent);
       color: #e9ecef;
       box-shadow: 0 0 0 0.25rem rgba(0, 212, 255, 0.25);
     }
-    
     .bg-light {
       background-color: #131a2d !important;
     }
-    
-    /* Animation for correct answers */
     @keyframes celebrate {
       0% { transform: scale(1); }
       50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
-    
     .celebrate {
       animation: celebrate 0.5s ease;
     }
-    
-    /* Leaderboard styles */
     .leaderboard-item {
       background: var(--futuristic-card);
       border-radius: 8px;
@@ -268,7 +251,6 @@
       justify-content: space-between;
       align-items: center;
     }
-    
     .leaderboard-position {
       background: var(--futuristic-accent);
       color: var(--dark);
@@ -280,8 +262,6 @@
       justify-content: center;
       font-weight: bold;
     }
-    
-    /* Dark mode toggle */
     .theme-toggle {
       background: transparent;
       border: none;
@@ -289,8 +269,6 @@
       font-size: 1.2rem;
       cursor: pointer;
     }
-    
-    /* Responsive adjustments */
     @media (max-width: 992px) {
       .gamification-panel {
         position: static;
@@ -301,7 +279,6 @@
   </style>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background: var(--futuristic-card)">
   <div class="container">
     <a class="navbar-brand fw-bold" href="#"><i class="fas fa-bolt me-2"></i>ElectroLearn Pro</a>
@@ -317,7 +294,7 @@
         <li class="nav-item"><a class="nav-link" href="#quizzes">Quizzes</a></li>
         <li class="nav-item"><a class="nav-link" href="#revision">Revision Cards</a></li>
         <li class="nav-item">
-          <button class="theme-toggle nav-link" id="themeToggle">
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
             <i class="fas fa-moon"></i>
           </button>
         </li>
@@ -332,12 +309,11 @@
     <h5 class="mb-0">Learning Progress</h5>
     <span class="level-badge">Level <span id="userLevel">1</span></span>
   </div>
-  
   <div class="d-flex align-items-center mb-3">
     <div class="position-relative me-3">
       <svg class="progress-ring" width="80" height="80">
         <circle class="progress-ring-circle" stroke-width="8" fill="transparent" r="36" cx="40" cy="40"
-          stroke-dasharray="226.194" stroke-dashoffset="0" id="progressCircle"></circle>
+          stroke-dasharray="226.194" stroke-dashoffset="226.194" id="progressCircle"></circle>
       </svg>
       <div class="position-absolute top-50 start-50 translate-middle text-center">
         <span class="xp-display" id="userXP">0</span>
@@ -349,7 +325,6 @@
       <div class="small">Quizzes Completed: <span id="quizzesCompleted">0</span>/20</div>
     </div>
   </div>
-  
   <div class="mb-3">
     <h6>Achievements</h6>
     <div id="achievementsList">
@@ -359,7 +334,6 @@
       <span class="achievement-badge" id="masterBadge" style="display: none;">Circuit Master</span>
     </div>
   </div>
-  
   <div>
     <h6>Leaderboard</h6>
     <div id="leaderboard">
@@ -379,25 +353,22 @@
     <h1 class="display-5"><i class="fas fa-bolt me-2"></i>ElectroLearn — TVET CDACC ICT Basic Electronics (Pro)</h1>
     <p class="lead">Step-by-step lessons, exam-style worked solutions, interactive practice tools, and quick revision — built for TVET/CDACC students and technicians.</p>
     <div class="no-print mt-3">
-      <button class="btn btn-success me-2" onclick="window.print()"><i class="fas fa-print me-1"></i>Print / Save as PDF</button>
+      <button class="btn btn-success me-2" id="printBtn"><i class="fas fa-print me-1"></i>Print / Save as PDF</button>
       <button class="btn btn-outline-light" id="toggleCompact"><i class="fas fa-compress me-1"></i>Toggle compact view</button>
     </div>
   </div>
 </header>
 
 <main class="container">
-
   <!-- Number Systems -->
   <section id="numbers" class="section">
     <div class="row">
       <div class="col-md-8">
         <h2><i class="fas fa-calculator me-2"></i>Number Systems — Visual & step-by-step</h2>
         <p class="text-muted">Binary, Decimal, Hex, Octal, Two's complement, Gray code — every step shown so you can write answers in exams with confidence.</p>
-
         <h4>Binary → Decimal (Place-value method)</h4>
         <p>To convert \(1101011_2\) to decimal: show powers of two under each digit and add.</p>
         <pre class="solution"> (from MSB) 1·2⁶ + 1·2⁵ + 0·2⁴ + 1·2³ + 0·2² + 1·2¹ + 1·2⁰ = 64 + 32 + 0 + 8 + 0 + 2 + 1 = 107</pre>
-
         <h4>Decimal → Binary (Divide-by-2 method) — fully shown</h4>
         <p>Example: Convert \(173_{10}\) to binary.</p>
         <pre class="solution">173 ÷ 2 = 86 remainder 1  (LSB)
@@ -410,29 +381,22 @@
 1 ÷ 2 = 0 remainder 1 (MSB)
 Read MSB → LSB: 10101101₂
 So 173₁₀ = 10101101₂</pre>
-
         <h4>Two's complement (signed values) — exam tip</h4>
         <p>Always show number of bits required (8-bit, 16-bit). Steps: write positive binary → invert → add 1.</p>
         <pre class="solution">Example: -37 in 8-bit
 37 → 00100101
 Invert → 11011010
 Add 1 → 11011011 (This is -37 in 8-bit two's complement)</pre>
-
         <h4>Gray code quick trick</h4>
         <p>Gray = Binary XOR (Binary shifted right 1). Use this in encoder questions.</p>
-
         <div class="highlight mt-2">Tip: In exams, write units and label your steps. Partial credit is given for method even if final arithmetic slips.</div>
-
         <hr/>
-
         <h4>Full worked examples (set)</h4>
         <ol>
           <li>Convert \(364_{10}\) to binary and hex — worked (answer displayed in solutions panel).</li>
           <li>Represent -84 in 8-bit two's complement — worked.</li>
           <li>Convert binary \(11011101_2\) to decimal and hex — worked.</li>
         </ol>
-
-        <!-- Solutions (collapsible) -->
         <details class="mt-2">
           <summary>Show Solutions</summary>
           <div class="mt-2">
@@ -441,17 +405,15 @@ Add 1 → 11011011 (This is -37 in 8-bit two's complement)</pre>
             <p><strong>3)</strong> 11011101₂ = 1·2⁷+1·2⁶+0·2⁵+1·2⁴+1·2³+1·2²+0·2¹+1·2⁰ = 128+64+0+16+8+4+0+1 = 221₁₀ = DD₁₆</p>
           </div>
         </details>
-
       </div>
-
       <div class="col-md-4">
         <h5 class="mb-2">Quick converter (use for practice)</h5>
         <div class="card card-slim">
           <label class="form-label small">Decimal</label>
-          <input id="dec" class="form-control form-control-sm mb-2" type="number" value="173">
+          <input id="dec" class="form-control form-control-sm mb-2" type="number" value="173" min="0">
           <div class="d-grid gap-2">
-            <button class="btn btn-primary btn-sm" onclick="decConvert()">Convert</button>
-            <button class="btn btn-outline-secondary btn-sm" onclick="clearConverter()">Clear</button>
+            <button class="btn btn-primary btn-sm" id="decConvertBtn">Convert</button>
+            <button class="btn btn-outline-secondary btn-sm" id="clearConverterBtn">Clear</button>
           </div>
           <div class="mt-2">
             <p class="mb-0"><strong>Binary:</strong> <span id="decBin">10101101</span></p>
@@ -459,9 +421,9 @@ Add 1 → 11011011 (This is -37 in 8-bit two's complement)</pre>
             <p class="mb-0"><strong>Octal:</strong> <span id="decOct">255</span></p>
           </div>
         </div>
-
         <h5 class="mt-4">Mini flashcards</h5>
-        <div id="flash" class="card flashcard">Click <button class="btn btn-sm btn-link" onclick="nextCard()">Next</button></div>
+        <div id="flash" class="card flashcard">Click Next</div>
+        <button class="btn btn-sm btn-link mt-2" id="nextCardBtn">Next</button>
       </div>
     </div>
   </section>
@@ -472,92 +434,72 @@ Add 1 → 11011011 (This is -37 in 8-bit two's complement)</pre>
       <div class="col-md-7">
         <h2><i class="fas fa-project-diagram me-2"></i>Circuits: Ohm's Law, Series & Parallel, Power</h2>
         <p>Simple rules and step-by-step worked examples with exam layout.</p>
-
         <h4>Ohm's law & Power</h4>
         <pre class="solution">Ohm's law: V = I R
 Power: P = V I = I²R = V²/R</pre>
-
         <h4>Series resistors (exam style)</h4>
         <p>Equivalent resistance: \(R_{eq} = R_1 + R_2 + ...\)</p>
-
         <h4>Parallel resistors</h4>
         <p>Using reciprocal sum: \(1/R_{eq} = 1/R_1 + 1/R_2 + ...\)</p>
-
         <h5 class="mt-3">Worked example (series-parallel)</h5>
         <pre class="solution">Find Req of: R1=100Ω in series with (R2=200Ω || R3=300Ω)
 First R2||R3 = (200*300)/(200+300) = 60000/500 = 120Ω
 Now Req = 100 + 120 = 220Ω
 If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
-
         <h4>Practical: LED resistor calculator</h4>
         <p>Formula: R = (V_supply - V_fwd) / I_fwd</p>
         <p>Example: 5V supply, LED Vf=2V, desired If=20mA → R=(5-2)/0.02=150Ω</p>
       </div>
-
       <div class="col-md-5">
         <h5>Visuals & quick interactive</h5>
-        <!-- Simple circuit SVG -->
         <svg class="diagram" viewBox="0 0 360 200" aria-label="series-parallel circuit">
           <rect x="6" y="6" width="348" height="188" rx="8" fill="#131a2d" stroke="#343a40"/>
           <text x="18" y="28" font-size="14" fill="#e9ecef">Series-Parallel Example (visual)</text>
-
-          <!-- battery -->
-          <rect x="20" y="60" width="18" height="60" fill="#495057"/>
-          <rect x="45" y="70" width="6" height="40" fill="#495057"/>
           <line x1="60" y1="90" x2="300" y2="90" stroke="#00d4ff" stroke-width="2"/>
-
-          <!-- R1 -->
           <rect x="120" y="70" width="30" height="20" fill="#1e2a3a" stroke="#00d4ff"/>
           <text x="122" y="86" font-size="12" fill="#e9ecef">R1=100Ω</text>
-
-          <!-- parallel branch -->
           <line x1="170" y1="90" x2="170" y2="50" stroke="#00d4ff"/>
           <rect x="150" y="40" width="40" height="16" fill="#1e2a3a" stroke="#00d4ff"/>
           <text x="152" y="52" font-size="11" fill="#e9ecef">R2=200Ω</text>
-
           <line x1="170" y1="90" x2="170" y2="150" stroke="#00d4ff"/>
           <rect x="150" y="132" width="40" height="16" fill="#1e2a3a" stroke="#00d4ff"/>
           <text x="152" y="144" font-size="11" fill="#e9ecef">R3=300Ω</text>
-
           <line x1="190" y1="90" x2="300" y2="90" stroke="#00d4ff"/>
         </svg>
-
         <div class="mt-3 card card-slim">
           <label class="form-label small">Supply Voltage (V)</label>
-          <input id="vSupply" class="form-control form-control-sm mb-2" value="44" />
+          <input id="vSupply" class="form-control form-control-sm mb-2" type="number" value="44" step="0.1">
           <label class="form-label small">R1, R2, R3 (ohms)</label>
-          <input id="r1" class="form-control form-control-sm mb-1" value="100">
-          <input id="r2" class="form-control form-control-sm mb-1" value="200">
-          <input id="r3" class="form-control form-control-sm mb-1" value="300">
-          <button class="btn btn-primary btn-sm mt-2" onclick="calcSeriesParallel()">Calculate Req & Current</button>
+          <input id="r1" class="form-control form-control-sm mb-1" type="number" value="100" min="0">
+          <input id="r2" class="form-control form-control-sm mb-1" type="number" value="200" min="0">
+          <input id="r3" class="form-control form-control-sm mb-1" type="number" value="300" min="0">
+          <button class="btn btn-primary btn-sm mt-2" id="calcSeriesParallelBtn">Calculate Req & Current</button>
           <div class="mt-2"><small><strong>Result:</strong> <span id="spResult">—</span></small></div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- Semiconductors & Devices -->
+  <!-- Semiconductors -->
   <section id="semiconductors" class="section">
     <div class="row">
       <div class="col-md-8">
         <h2><i class="fas fa-microchip me-2"></i>Semiconductors & Diodes — clear, exam-friendly</h2>
         <p>PN junction behaviour, forward/reverse bias, diode equation, and simple transistor role explanation.</p>
-
         <h4>Diode I-V curve quick points</h4>
         <ol>
           <li>Forward conduction around 0.6–0.7V for silicon</li>
           <li>Reverse: small leakage, then breakdown at high negative voltages</li>
           <li>Zener diodes: designed to breakdown at a controlled voltage for regulation</li>
         </ol>
-
         <h4>Transistor basics (NPN as a switch)</h4>
         <p>An NPN transistor can be used as a low-side switch. Short explanation + exam-style wiring diagram included.</p>
-
       </div>
-
       <div class="col-md-4">
-        <img src="https://www.electronics-tutorials.ws/wp-content/uploads/2018/05/diode-dc5.gif" class="diagram" alt="Diode I-V">
+        <img src="https://www.electronics-tutorials.ws/wp-content/uploads/2018/05/diode-dc5.gif"
+             class="diagram"
+             alt="Diode I-V characteristic curve"
+             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22><rect fill=%22%23131a2d%22 width=%22100%25%22 height=%22100%25%22/><text x=%2250%25%22 y=%2250%22 fill=%22%23e9ecef%22 font-size=%2216%22 text-anchor=%22middle%22 dy=%22.3em%22>Diode I-V Diagram Unavailable</text></svg>'">
         <div class="mt-2 highlight">Exam tip: label currents and voltages, write units, and explicitly state assumptions (e.g., diode forward drop = 0.7V if not stated).</div>
       </div>
     </div>
@@ -571,24 +513,22 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
         <div class="card card-slim mb-3">
           <h6>LED Resistor Calculator</h6>
           <label class="form-label small">Supply Voltage V<sub>sup</sub></label>
-          <input id="ledVsup" class="form-control form-control-sm mb-1" value="5">
+          <input id="ledVsup" class="form-control form-control-sm mb-1" type="number" value="5" step="0.1">
           <label class="form-label small">LED Forward Voltage V<sub>f</sub></label>
-          <input id="ledVf" class="form-control form-control-sm mb-1" value="2">
+          <input id="ledVf" class="form-control form-control-sm mb-1" type="number" value="2" step="0.1">
           <label class="form-label small">Desired current (mA)</label>
-          <input id="ledIf" class="form-control form-control-sm mb-1" value="20">
-          <button class="btn btn-primary btn-sm" onclick="calcLed()">Calculate R</button>
+          <input id="ledIf" class="form-control form-control-sm mb-1" type="number" value="20" min="1">
+          <button class="btn btn-primary btn-sm" id="calcLedBtn">Calculate R</button>
           <div class="mt-2"><small>Result: <span id="ledResult">—</span></small></div>
         </div>
-
         <div class="card card-slim">
           <h6>Binary Quiz (instant check)</h6>
           <label class="form-label small">Binary</label>
-          <input id="bq" class="form-control form-control-sm mb-1" value="101101">
-          <button class="btn btn-primary btn-sm" onclick="checkBinary()">Check → Decimal</button>
+          <input id="bq" class="form-control form-control-sm mb-1" value="101101" pattern="[01]*">
+          <button class="btn btn-primary btn-sm" id="checkBinaryBtn">Check → Decimal</button>
           <div class="mt-2"><small>Answer: <span id="bqAns">—</span></small></div>
         </div>
       </div>
-
       <div class="col-md-6">
         <h3>Logic Gate Simulator (simple)</h3>
         <div class="card card-slim">
@@ -602,11 +542,11 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
               <input id="b" type="number" min="0" max="1" class="form-control form-control-sm" value="0">
             </div>
           </div>
-          <div class="mt-2 d-flex gap-2">
-            <button class="btn btn-outline-primary btn-sm" onclick="doGate('AND')">AND</button>
-            <button class="btn btn-outline-primary btn-sm" onclick="doGate('OR')">OR</button>
-            <button class="btn btn-outline-primary btn-sm" onclick="doGate('XOR')">XOR</button>
-            <button class="btn btn-outline-primary btn-sm" onclick="doGate('NOT')">NOT A</button>
+          <div class="mt-2 d-flex flex-wrap gap-2">
+            <button class="btn btn-outline-primary btn-sm" id="gateAnd">AND</button>
+            <button class="btn btn-outline-primary btn-sm" id="gateOr">OR</button>
+            <button class="btn btn-outline-primary btn-sm" id="gateXor">XOR</button>
+            <button class="btn btn-outline-primary btn-sm" id="gateNot">NOT A</button>
           </div>
           <div class="mt-2"><small>Output: <span id="gateOut">—</span></small></div>
         </div>
@@ -614,11 +554,10 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
     </div>
   </section>
 
-  <!-- Quizzes and Past Papers -->
+  <!-- Quizzes -->
   <section id="quizzes" class="section">
     <h2><i class="fas fa-tasks me-2"></i>Quizzes & Short Past-Paper Questions</h2>
     <p>Use these as 10–20 minute practice tasks. Answer then click check to see worked solutions and marking points.</p>
-
     <div class="row">
       <div class="col-md-6">
         <div class="card card-slim">
@@ -628,35 +567,28 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
             <li>Represent -18 in 8-bit two's complement.</li>
             <li>What is 0x7F in decimal?</li>
           </ol>
-          <button class="btn btn-primary btn-sm" onclick="showNumAnswers()">Show Answers & Marking</button>
+          <button class="btn btn-primary btn-sm" id="showNumAnswersBtn">Show Answers & Marking</button>
           <div id="numAnswers" style="display:none" class="mt-2"></div>
         </div>
       </div>
-
       <div class="col-md-6">
         <div class="card card-slim">
           <h6>Short Quiz — Circuits</h6>
           <ol>
             <li>A 12V battery feeds a 240Ω resistor. Find current and power.</li>
-            <li>Find equivalent of 150Ω || 300Ω.
-            </li>
+            <li>Find equivalent of 150Ω || 300Ω.</li>
           </ol>
-          <button class="btn btn-primary btn-sm" onclick="showCircAnswers()">Show Answers</button>
+          <button class="btn btn-primary btn-sm" id="showCircAnswersBtn">Show Answers</button>
           <div id="circAnswers" style="display:none" class="mt-2"></div>
         </div>
       </div>
     </div>
-
     <hr/>
-    
-    <!-- Enhanced Quiz Section with 20+ Quizzes -->
     <h3 class="mt-5">Interactive Quizzes with Full Worked Solutions</h3>
     <p class="text-muted">Complete these quizzes to earn XP and level up!</p>
-    
     <div class="row" id="quizContainer">
-      <!-- Quizzes will be dynamically inserted here -->
+      <!-- Dynamically populated -->
     </div>
-
     <hr/>
     <h5>Sample short past paper (timed 60 minutes)</h5>
     <ol>
@@ -676,18 +608,17 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
       <div class="col-md-4">
         <div class="card card-slim">
           <h6>Formulas</h6>
-          <ul>
+          <ul class="mb-0">
             <li>V = I R</li>
             <li>P = V I = I² R = V² / R</li>
-            <li>XL = 2πfL, XC = 1/(2πfC)</li>
-            <li>Rpar = 1/(1/R1 + 1/R2)</li>
+            <li>R<sub>eq</sub> (parallel) = 1/(1/R1 + 1/R2)</li>
           </ul>
         </div>
       </div>
       <div class="col-md-4">
         <div class="card card-slim">
           <h6>Binary facts</h6>
-          <ul>
+          <ul class="mb-0">
             <li>8-bit range unsigned: 0–255</li>
             <li>Two's complement 8-bit: -128 to +127</li>
             <li>Hex digit = 4 bits</li>
@@ -697,10 +628,10 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
       <div class="col-md-4">
         <div class="card card-slim">
           <h6>Exam Strategy</h6>
-          <ul>
+          <ul class="mb-0">
             <li>Show working steps for partial credit</li>
             <li>Write units always</li>
-            <li>Use common assumptions if not stated (e.g., diode 0.7V)</li>
+            <li>Use common assumptions if not stated</li>
           </ul>
         </div>
       </div>
@@ -718,7 +649,6 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
       <li><strong>Oscillators & clocks</strong> — CPU and network timing; jitter impacts protocols.</li>
     </ul>
   </section>
-
 </main>
 
 <footer class="py-4 mt-4" style="background: var(--futuristic-card);">
@@ -727,292 +657,127 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
   </div>
 </footer>
 
-<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // Quiz data with questions, options, answers, and explanations
-  const quizData = [
-    {
-      id: 1,
-      category: "Number Systems",
-      question: "Convert 230₁₀ to binary.",
-      options: ["11100110", "11100111", "11101010", "11101100"],
-      correct: 0,
-      explanation: "230 ÷ 2 = 115 R0, 115 ÷ 2 = 57 R1, 57 ÷ 2 = 28 R1, 28 ÷ 2 = 14 R0, 14 ÷ 2 = 7 R0, 7 ÷ 2 = 3 R1, 3 ÷ 2 = 1 R1, 1 ÷ 2 = 0 R1. Reading remainders from bottom: 11100110₂"
-    },
-    {
-      id: 2,
-      category: "Number Systems",
-      question: "Represent -18 in 8-bit two's complement.",
-      options: ["11101101", "11101110", "11101111", "11110000"],
-      correct: 1,
-      explanation: "18 in binary: 00010010 → invert: 11101101 → add 1: 11101110"
-    },
-    {
-      id: 3,
-      category: "Number Systems",
-      question: "What is 0x7F in decimal?",
-      options: ["127", "126", "128", "255"],
-      correct: 0,
-      explanation: "0x7F = 7×16 + 15 = 112 + 15 = 127"
-    },
-    {
-      id: 4,
-      category: "Circuits",
-      question: "A 12V battery feeds a 240Ω resistor. Find current and power.",
-      options: ["0.05A, 0.6W", "0.06A, 0.72W", "0.04A, 0.48W", "0.03A, 0.36W"],
-      correct: 0,
-      explanation: "I = V/R = 12/240 = 0.05A, P = V×I = 12×0.05 = 0.6W"
-    },
-    {
-      id: 5,
-      category: "Circuits",
-      question: "Find equivalent resistance of 150Ω || 300Ω.",
-      options: ["100Ω", "150Ω", "200Ω", "50Ω"],
-      correct: 0,
-      explanation: "R_eq = (150×300)/(150+300) = 45000/450 = 100Ω"
-    },
-    {
-      id: 6,
-      category: "Circuits",
-      question: "Calculate power dissipated in a 100Ω resistor with 0.5A current.",
-      options: ["25W", "50W", "100W", "200W"],
-      correct: 0,
-      explanation: "P = I²R = (0.5)² × 100 = 0.25 × 100 = 25W"
-    },
-    {
-      id: 7,
-      category: "Circuits",
-      question: "Three 60Ω resistors in parallel. What is the equivalent resistance?",
-      options: ["20Ω", "60Ω", "180Ω", "30Ω"],
-      correct: 0,
-      explanation: "1/R_eq = 1/60 + 1/60 + 1/60 = 3/60 = 1/20 → R_eq = 20Ω"
-    },
-    {
-      id: 8,
-      category: "Circuits",
-      question: "A circuit has 10V supply and draws 2A. What is the resistance?",
-      options: ["5Ω", "10Ω", "20Ω", "2Ω"],
-      correct: 0,
-      explanation: "R = V/I = 10/2 = 5Ω"
-    },
-    {
-      id: 9,
-      category: "Semiconductors",
-      question: "What is the typical forward voltage drop for a silicon diode?",
-      options: ["0.3V", "0.7V", "1.2V", "2.0V"],
-      correct: 1,
-      explanation: "Silicon diodes typically have a forward voltage drop of 0.6-0.7V"
-    },
-    {
-      id: 10,
-      category: "Semiconductors",
-      question: "Which diode is designed to operate in reverse breakdown region?",
-      options: ["LED", "Zener diode", "Schottky diode", "Varactor diode"],
-      correct: 1,
-      explanation: "Zener diodes are specifically designed to operate in the reverse breakdown region for voltage regulation"
-    },
-    {
-      id: 11,
-      category: "Semiconductors",
-      question: "In an NPN transistor, the base-emitter junction is:",
-      options: ["Reverse biased", "Forward biased", "Open", "Shorted"],
-      correct: 1,
-      explanation: "For an NPN transistor to operate in active mode, the base-emitter junction must be forward biased"
-    },
-    {
-      id: 12,
-      category: "Number Systems",
-      question: "Convert 10110101₂ to decimal.",
-      options: ["181", "182", "183", "180"],
-      correct: 0,
-      explanation: "1×128 + 0×64 + 1×32 + 1×16 + 0×8 + 1×4 + 0×2 + 1×1 = 128+32+16+4+1 = 181"
-    },
-    {
-      id: 13,
-      category: "Number Systems",
-      question: "What is the two's complement range for 8-bit numbers?",
-      options: ["-127 to +128", "-128 to +127", "-256 to +255", "0 to 255"],
-      correct: 1,
-      explanation: "8-bit two's complement range is -128 to +127"
-    },
-    {
-      id: 14,
-      category: "Circuits",
-      question: "Calculate voltage across a 50Ω resistor with 0.1A current.",
-      options: ["5V", "10V", "15V", "20V"],
-      correct: 0,
-      explanation: "V = I×R = 0.1×50 = 5V"
-    },
-    {
-      id: 15,
-      category: "Circuits",
-      question: "A 100W bulb operates at 230V. What is its resistance?",
-      options: ["529Ω", "629Ω", "729Ω", "829Ω"],
-      correct: 0,
-      explanation: "P = V²/R → R = V²/P = (230)²/100 = 52900/100 = 529Ω"
-    },
-    {
-      id: 16,
-      category: "Circuits",
-      question: "Three 30Ω resistors in series. What is the equivalent resistance?",
-      options: ["30Ω", "60Ω", "90Ω", "10Ω"],
-      correct: 2,
-      explanation: "R_eq = R1 + R2 + R3 = 30 + 30 + 30 = 90Ω"
-    },
-    {
-      id: 17,
-      category: "Semiconductors",
-      question: "Which material is commonly used for making semiconductors?",
-      options: ["Copper", "Silicon", "Aluminum", "Gold"],
-      correct: 1,
-      explanation: "Silicon is the most commonly used material for semiconductor devices"
-    },
-    {
-      id: 18,
-      category: "Semiconductors",
-      question: "What is the main function of a rectifier diode?",
-      options: ["Amplify signals", "Convert AC to DC", "Regulate voltage", "Store charge"],
-      correct: 1,
-      explanation: "Rectifier diodes are used to convert alternating current (AC) to direct current (DC)"
-    },
-    {
-      id: 19,
-      category: "Number Systems",
-      question: "Convert 0xFF to decimal.",
-      options: ["255", "256", "254", "253"],
-      correct: 0,
-      explanation: "0xFF = 15×16 + 15 = 240 + 15 = 255"
-    },
-    {
-      id: 20,
-      category: "Number Systems",
-      question: "What is the binary equivalent of 0x2A?",
-      options: ["00101010", "00101011", "00101100", "00101101"],
-      correct: 0,
-      explanation: "0x2A = 2×16 + 10 = 32 + 10 = 42 → 42 in binary: 32+8+2 = 00101010"
+  // === Render math on load ===
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof renderMathInElement === 'function') {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: "$$", right: "$$", display: true},
+          {left: "$", right: "$", display: false},
+          {left: "\\(", right: "\\)", display: false},
+          {left: "\\[", right: "\\]", display: true}
+        ]
+      });
     }
+  });
+
+  // === Quiz Data ===
+  const quizData = [
+    { id: 1, category: "Number Systems", question: "Convert 230₁₀ to binary.", options: ["11100110", "11100111", "11101010", "11101100"], correct: 0, explanation: "230 ÷ 2 = 115 R0, 115 ÷ 2 = 57 R1, 57 ÷ 2 = 28 R1, 28 ÷ 2 = 14 R0, 14 ÷ 2 = 7 R0, 7 ÷ 2 = 3 R1, 3 ÷ 2 = 1 R1, 1 ÷ 2 = 0 R1. Reading remainders from bottom: 11100110₂" },
+    { id: 2, category: "Number Systems", question: "Represent -18 in 8-bit two's complement.", options: ["11101101", "11101110", "11101111", "11110000"], correct: 1, explanation: "18 in binary: 00010010 → invert: 11101101 → add 1: 11101110" },
+    { id: 3, category: "Number Systems", question: "What is 0x7F in decimal?", options: ["127", "126", "128", "255"], correct: 0, explanation: "0x7F = 7×16 + 15 = 112 + 15 = 127" },
+    { id: 4, category: "Circuits", question: "A 12V battery feeds a 240Ω resistor. Find current and power.", options: ["0.05A, 0.6W", "0.06A, 0.72W", "0.04A, 0.48W", "0.03A, 0.36W"], correct: 0, explanation: "I = V/R = 12/240 = 0.05A, P = V×I = 12×0.05 = 0.6W" },
+    { id: 5, category: "Circuits", question: "Find equivalent resistance of 150Ω || 300Ω.", options: ["100Ω", "150Ω", "200Ω", "50Ω"], correct: 0, explanation: "R_eq = (150×300)/(150+300) = 45000/450 = 100Ω" },
+    { id: 6, category: "Circuits", question: "Calculate power dissipated in a 100Ω resistor with 0.5A current.", options: ["25W", "50W", "100W", "200W"], correct: 0, explanation: "P = I²R = (0.5)² × 100 = 0.25 × 100 = 25W" },
+    { id: 7, category: "Circuits", question: "Three 60Ω resistors in parallel. What is the equivalent resistance?", options: ["20Ω", "60Ω", "180Ω", "30Ω"], correct: 0, explanation: "1/R_eq = 1/60 + 1/60 + 1/60 = 3/60 = 1/20 → R_eq = 20Ω" },
+    { id: 8, category: "Circuits", question: "A circuit has 10V supply and draws 2A. What is the resistance?", options: ["5Ω", "10Ω", "20Ω", "2Ω"], correct: 0, explanation: "R = V/I = 10/2 = 5Ω" },
+    { id: 9, category: "Semiconductors", question: "What is the typical forward voltage drop for a silicon diode?", options: ["0.3V", "0.7V", "1.2V", "2.0V"], correct: 1, explanation: "Silicon diodes typically have a forward voltage drop of 0.6-0.7V" },
+    { id: 10, category: "Semiconductors", question: "Which diode is designed to operate in reverse breakdown region?", options: ["LED", "Zener diode", "Schottky diode", "Varactor diode"], correct: 1, explanation: "Zener diodes are specifically designed to operate in the reverse breakdown region for voltage regulation" },
+    { id: 11, category: "Semiconductors", question: "In an NPN transistor, the base-emitter junction is:", options: ["Reverse biased", "Forward biased", "Open", "Shorted"], correct: 1, explanation: "For an NPN transistor to operate in active mode, the base-emitter junction must be forward biased" },
+    { id: 12, category: "Number Systems", question: "Convert 10110101₂ to decimal.", options: ["181", "182", "183", "180"], correct: 0, explanation: "1×128 + 0×64 + 1×32 + 1×16 + 0×8 + 1×4 + 0×2 + 1×1 = 128+32+16+4+1 = 181" },
+    { id: 13, category: "Number Systems", question: "What is the two's complement range for 8-bit numbers?", options: ["-127 to +128", "-128 to +127", "-256 to +255", "0 to 255"], correct: 1, explanation: "8-bit two's complement range is -128 to +127" },
+    { id: 14, category: "Circuits", question: "Calculate voltage across a 50Ω resistor with 0.1A current.", options: ["5V", "10V", "15V", "20V"], correct: 0, explanation: "V = I×R = 0.1×50 = 5V" },
+    { id: 15, category: "Circuits", question: "A 100W bulb operates at 230V. What is its resistance?", options: ["529Ω", "629Ω", "729Ω", "829Ω"], correct: 0, explanation: "P = V²/R → R = V²/P = (230)²/100 = 52900/100 = 529Ω" },
+    { id: 16, category: "Circuits", question: "Three 30Ω resistors in series. What is the equivalent resistance?", options: ["30Ω", "60Ω", "90Ω", "10Ω"], correct: 2, explanation: "R_eq = R1 + R2 + R3 = 30 + 30 + 30 = 90Ω" },
+    { id: 17, category: "Semiconductors", question: "Which material is commonly used for making semiconductors?", options: ["Copper", "Silicon", "Aluminum", "Gold"], correct: 1, explanation: "Silicon is the most commonly used material for semiconductor devices" },
+    { id: 18, category: "Semiconductors", question: "What is the main function of a rectifier diode?", options: ["Amplify signals", "Convert AC to DC", "Regulate voltage", "Store charge"], correct: 1, explanation: "Rectifier diodes are used to convert alternating current (AC) to direct current (DC)" },
+    { id: 19, category: "Number Systems", question: "Convert 0xFF to decimal.", options: ["255", "256", "254", "253"], correct: 0, explanation: "0xFF = 15×16 + 15 = 240 + 15 = 255" },
+    { id: 20, category: "Number Systems", question: "What is the binary equivalent of 0x2A?", options: ["00101010", "00101011", "00101100", "00101101"], correct: 0, explanation: "0x2A = 2×16 + 10 = 32 + 10 = 42 → 42 in binary: 32+8+2 = 00101010" }
   ];
 
-  // User progress data
+  // === User Progress ===
   let userProgress = {
     xp: 0,
     level: 1,
     nextLevelXP: 100,
     quizzesCompleted: 0,
-    achievements: {
-      firstQuiz: false,
-      halfway: false,
-      perfectScore: false,
-      master: false
-    },
+    achievements: { firstQuiz: false, halfway: false, perfectScore: false, master: false },
     quizScores: {}
   };
 
-  // Load progress from localStorage
+  // === LocalStorage ===
   function loadProgress() {
     const saved = localStorage.getItem('electroLearnProgress');
     if (saved) {
       userProgress = JSON.parse(saved);
-      updateProgressUI();
+      // Apply theme
+      if (localStorage.getItem('theme') === 'light') {
+        toggleTheme();
+      }
     }
+    updateProgressUI();
   }
-
-  // Save progress to localStorage
   function saveProgress() {
     localStorage.setItem('electroLearnProgress', JSON.stringify(userProgress));
   }
 
-  // Update progress UI
+  // === UI Updates ===
   function updateProgressUI() {
     document.getElementById('userXP').textContent = userProgress.xp;
     document.getElementById('userLevel').textContent = userProgress.level;
     document.getElementById('nextLevelXP').textContent = userProgress.nextLevelXP;
     document.getElementById('quizzesCompleted').textContent = userProgress.quizzesCompleted;
     document.getElementById('leaderboardXP').textContent = userProgress.xp + ' XP';
-    
-    // Update progress circle
-    const progressPercent = (userProgress.xp / userProgress.nextLevelXP) * 100;
-    const circumference = 226.194; // 2 * π * 36
+
+    const progressPercent = Math.min(100, (userProgress.xp / userProgress.nextLevelXP) * 100);
+    const circumference = 226.194;
     const offset = circumference - (progressPercent / 100) * circumference;
     document.getElementById('progressCircle').style.strokeDashoffset = offset;
-    
-    // Update achievements
-    if (userProgress.achievements.firstQuiz) {
-      document.getElementById('firstQuizBadge').style.display = 'inline-block';
-    }
-    if (userProgress.achievements.halfway) {
-      document.getElementById('halfwayBadge').style.display = 'inline-block';
-    }
-    if (userProgress.achievements.perfectScore) {
-      document.getElementById('perfectScoreBadge').style.display = 'inline-block';
-    }
-    if (userProgress.achievements.master) {
-      document.getElementById('masterBadge').style.display = 'inline-block';
-    }
+
+    if (userProgress.achievements.firstQuiz) document.getElementById('firstQuizBadge').style.display = 'inline-block';
+    if (userProgress.achievements.halfway) document.getElementById('halfwayBadge').style.display = 'inline-block';
+    if (userProgress.achievements.perfectScore) document.getElementById('perfectScoreBadge').style.display = 'inline-block';
+    if (userProgress.achievements.master) document.getElementById('masterBadge').style.display = 'inline-block';
   }
 
-  // Add XP and check for level up
+  function showNotification(message, type = 'info') {
+    const notif = document.createElement('div');
+    notif.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+    notif.style.cssText = 'top: 20px; right: 20px; zIndex: 1050; max-width: 300px;';
+    notif.innerHTML = `${message} <button type="button" class="btn-close" data-bs-dismiss="alert"></button>`;
+    document.body.appendChild(notif);
+    setTimeout(() => notif.remove(), 5000);
+  }
+
   function addXP(amount) {
     userProgress.xp += amount;
-    
-    // Check for level up
     if (userProgress.xp >= userProgress.nextLevelXP) {
       userProgress.level++;
       userProgress.nextLevelXP = Math.floor(userProgress.nextLevelXP * 1.5);
-      
-      // Show level up notification
       showNotification(`Level Up! You're now Level ${userProgress.level}`, 'success');
     }
-    
-    // Update achievements
     if (userProgress.quizzesCompleted >= 1 && !userProgress.achievements.firstQuiz) {
       userProgress.achievements.firstQuiz = true;
       showNotification('Achievement Unlocked: First Quiz!', 'info');
     }
-    
     if (userProgress.quizzesCompleted >= 10 && !userProgress.achievements.halfway) {
       userProgress.achievements.halfway = true;
       showNotification('Achievement Unlocked: Halfway There!', 'info');
     }
-    
     if (userProgress.quizzesCompleted >= 20 && !userProgress.achievements.master) {
       userProgress.achievements.master = true;
       showNotification('Achievement Unlocked: Circuit Master!', 'info');
     }
-    
     saveProgress();
     updateProgressUI();
   }
 
-  // Show notification
-  function showNotification(message, type) {
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
-    notification.style.top = '20px';
-    notification.style.right = '20px';
-    notification.style.zIndex = '1050';
-    notification.innerHTML = `
-      ${message}
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // Auto remove after 5 seconds
-    setTimeout(() => {
-      if (notification.parentNode) {
-        notification.parentNode.removeChild(notification);
-      }
-    }, 5000);
-  }
-
-  // Render quizzes
+  // === Quizzes ===
   function renderQuizzes() {
     const container = document.getElementById('quizContainer');
     container.innerHTML = '';
-    
     quizData.forEach(quiz => {
       const isCompleted = userProgress.quizScores[quiz.id];
       const card = document.createElement('div');
@@ -1024,75 +789,75 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
             ${isCompleted ? '<span class="badge bg-success"><i class="fas fa-check"></i></span>' : ''}
           </div>
           <h6>${quiz.question}</h6>
-          <div class="quiz-options">
-            ${quiz.options.map((option, index) => `
-              <div class="quiz-option" onclick="checkAnswer(${quiz.id}, ${index})">
-                ${String.fromCharCode(65 + index)}) ${option}
-              </div>
-            `).join('')}
+          <div class="quiz-options" id="options-${quiz.id}">
+            ${quiz.options.map((opt, i) => `<div class="quiz-option" data-index="${i}">${String.fromCharCode(65 + i)}) ${opt}</div>`).join('')}
           </div>
           <div id="explanation-${quiz.id}" class="mt-2" style="display: none;">
-            <div class="alert alert-info">
-              <strong>Explanation:</strong> ${quiz.explanation}
-            </div>
+            <div class="alert alert-info"><strong>Explanation:</strong> ${quiz.explanation}</div>
           </div>
         </div>
       `;
       container.appendChild(card);
     });
+    // Attach event listeners after render
+    document.querySelectorAll('.quiz-option').forEach(el => {
+      el.addEventListener('click', (e) => {
+        const quizId = parseInt(e.target.closest('.quiz-card').querySelector('.quiz-options').id.split('-')[1]);
+        const selectedIndex = parseInt(e.target.dataset.index);
+        checkAnswer(quizId, selectedIndex);
+      });
+    });
   }
 
-  // Check answer
   function checkAnswer(quizId, selectedIndex) {
     const quiz = quizData.find(q => q.id === quizId);
     const explanationEl = document.getElementById(`explanation-${quizId}`);
-    
-    // Mark if this is the first time completing this quiz
     const firstTime = !userProgress.quizScores[quizId];
-    
+    const optionEls = Array.from(explanationEl.parentElement.querySelectorAll('.quiz-option'));
+
+    // Reset classes
+    optionEls.forEach(el => {
+      el.classList.remove('correct', 'incorrect', 'celebrate');
+    });
+
     if (selectedIndex === quiz.correct) {
-      // Correct answer
-      const optionEls = explanationEl.parentElement.querySelectorAll('.quiz-option');
       optionEls[selectedIndex].classList.add('correct', 'celebrate');
-      
-      // Add XP if first time
       if (firstTime) {
         userProgress.quizzesCompleted++;
         userProgress.quizScores[quizId] = true;
         addXP(10);
-        
-        // Check for perfect score achievement
         if (userProgress.quizzesCompleted === quizData.length && !userProgress.achievements.perfectScore) {
           userProgress.achievements.perfectScore = true;
           showNotification('Achievement Unlocked: Perfect Score!', 'info');
         }
       }
-      
       showNotification('Correct! +10 XP', 'success');
     } else {
-      // Incorrect answer
-      const optionEls = explanationEl.parentElement.querySelectorAll('.quiz-option');
       optionEls[selectedIndex].classList.add('incorrect');
       optionEls[quiz.correct].classList.add('correct');
       showNotification('Incorrect. Try again!', 'danger');
     }
-    
-    // Show explanation
     explanationEl.style.display = 'block';
-    
     saveProgress();
   }
 
-  // small utilities
-  function decConvert(){
-    const n = parseInt(document.getElementById('dec').value,10) || 0;
+  // === Utility Functions ===
+  function decConvert() {
+    const n = parseInt(document.getElementById('dec').value, 10) || 0;
+    if (n < 0) {
+      document.getElementById('dec').value = 0;
+      return;
+    }
     document.getElementById('decBin').innerText = n.toString(2);
     document.getElementById('decHex').innerText = n.toString(16).toUpperCase();
     document.getElementById('decOct').innerText = n.toString(8);
   }
-  function clearConverter(){ document.getElementById('dec').value=''; decConvert(); }
 
-  // flashcards
+  function clearConverter() {
+    document.getElementById('dec').value = '';
+    decConvert();
+  }
+
   const cards = [
     'Binary place values: 1,2,4,8,16,32,64,128',
     'Hex digits use 0–9 A–F; 1 hex digit = 4 bits',
@@ -1100,103 +865,130 @@ If applied V=44V → I = 44/220 = 0.2A → Power total = V*I = 8.8W</pre>
     'Ohm\'s law: V = I R'
   ];
   let ci = 0;
-  function nextCard(){ document.getElementById('flash').innerText = cards[ci]; ci = (ci+1) % cards.length; }
-  nextCard();
+  function nextCard() {
+    document.getElementById('flash').innerText = cards[ci];
+    ci = (ci + 1) % cards.length;
+  }
 
-  // Series-parallel calc
-  function calcSeriesParallel(){
-    const V = parseFloat(document.getElementById('vSupply').value)||0;
-    const r1 = parseFloat(document.getElementById('r1').value)||0;
-    const r2 = parseFloat(document.getElementById('r2').value)||0;
-    const r3 = parseFloat(document.getElementById('r3').value)||0;
-    const r23 = (r2*r3)/(r2+r3);
+  function calcSeriesParallel() {
+    const V = parseFloat(document.getElementById('vSupply').value) || 0;
+    const r1 = parseFloat(document.getElementById('r1').value) || 0;
+    const r2 = parseFloat(document.getElementById('r2').value) || 0;
+    const r3 = parseFloat(document.getElementById('r3').value) || 0;
+    if (r2 + r3 === 0) {
+      document.getElementById('spResult').innerText = 'Error: R2 or R3 = 0';
+      return;
+    }
+    const r23 = (r2 * r3) / (r2 + r3);
     const req = r1 + r23;
-    const I = V/req;
+    const I = isFinite(V / req) ? V / req : 0;
     document.getElementById('spResult').innerText = `Req=${req.toFixed(2)}Ω, I=${I.toFixed(3)}A`;
   }
 
-  // LED calculator
-  function calcLed(){
-    const Vsup = parseFloat(document.getElementById('ledVsup').value)||0;
-    const Vf = parseFloat(document.getElementById('ledVf').value)||0;
-    const If_mA = parseFloat(document.getElementById('ledIf').value)||0;
-    const If = If_mA/1000;
-    const R = (Vsup - Vf)/If;
-    document.getElementById('ledResult').innerText = isFinite(R)? Math.max(0,Math.round(R)) + ' Ω' : 'Check values';
+  function calcLed() {
+    const Vsup = parseFloat(document.getElementById('ledVsup').value) || 0;
+    const Vf = parseFloat(document.getElementById('ledVf').value) || 0;
+    const If_mA = parseFloat(document.getElementById('ledIf').value) || 1;
+    if (Vsup <= Vf) {
+      document.getElementById('ledResult').innerText = 'V<sub>sup</sub> must be > V<sub>f</sub>';
+      return;
+    }
+    const If = If_mA / 1000;
+    const R = (Vsup - Vf) / If;
+    document.getElementById('ledResult').innerText = isFinite(R) ? Math.round(R) + ' Ω' : 'Check values';
   }
 
-  // Binary quiz
-  function checkBinary(){
+  function checkBinary() {
     const b = document.getElementById('bq').value.trim();
-    if(!/^[01]+$/.test(b)){ alert('Enter binary only'); return; }
-    let dec = parseInt(b,2);
-    document.getElementById('bqAns').innerText = dec;
+    if (!/^[01]+$/.test(b)) {
+      showNotification('Enter binary digits (0/1) only', 'warning');
+      return;
+    }
+    document.getElementById('bqAns').innerText = parseInt(b, 2);
   }
 
-  // Logic gates
-  function doGate(g){
-    const A = Number(document.getElementById('a').value) ? 1:0;
-    const B = Number(document.getElementById('b').value) ? 1:0;
-    let out = 0;
-    switch(g){
+  function doGate(type) {
+    const A = Number(document.getElementById('a').value) || 0;
+    const B = Number(document.getElementById('b').value) || 0;
+    let out;
+    switch (type) {
       case 'AND': out = A & B; break;
       case 'OR': out = A | B; break;
       case 'XOR': out = A ^ B; break;
-      case 'NOT': out = A ? 0:1; break;
+      case 'NOT': out = A ? 0 : 1; break;
+      default: out = 0;
     }
     document.getElementById('gateOut').innerText = out;
   }
 
-  // Quiz answers
-  function showNumAnswers(){
+  function showNumAnswers() {
     const el = document.getElementById('numAnswers');
-    el.style.display='block';
-    el.innerHTML = `<ol><li>230₁₀ = 11100110₂ (work: divide by 2)</li><li>-18 (8-bit) → 18=00010010 -> invert=11101101, +1=11101110</li><li>0x7F = 127₁₀</li></ol>`;
-    window.scrollTo({top:el.offsetTop-60,behavior:'smooth'});
-  }
-  function showCircAnswers(){
-    const el = document.getElementById('circAnswers'); el.style.display='block';
-    el.innerHTML = `<ol><li>I = V/R = 12/240 = 0.05A, P = V*I = 0.6W</li><li>150||300 => (150*300)/(150+300)=45000/450=100Ω</li></ol>`;
-    window.scrollTo({top:el.offsetTop-60,behavior:'smooth'});
+    el.style.display = 'block';
+    el.innerHTML = `<ol><li>230₁₀ = 11100110₂ (work: divide by 2)</li><li>-18 (8-bit) → 18=00010010 → invert=11101101 → +1=11101110</li><li>0x7F = 127₁₀</li></ol>`;
   }
 
-  // compact view toggle
-  document.getElementById('toggleCompact').addEventListener('click',()=>{
-    document.body.classList.toggle('compact');
-    document.querySelectorAll('.diagram').forEach(d=>d.style.maxHeight = document.body.classList.contains('compact') ? '200px' : 'none');
-  });
+  function showCircAnswers() {
+    const el = document.getElementById('circAnswers');
+    el.style.display = 'block';
+    el.innerHTML = `<ol><li>I = V/R = 12/240 = 0.05A, P = V*I = 0.6W</li><li>150||300 → (150×300)/(150+300) = 100Ω</li></ol>`;
+  }
 
-  // Theme toggle
-  document.getElementById('themeToggle').addEventListener('click', () => {
-    if (document.body.style.getPropertyValue('--futuristic-bg') === '#0a0e17') {
-      // Switch to light theme
+  // === Theme Toggle ===
+  function toggleTheme() {
+    const isDark = document.body.style.getPropertyValue('--futuristic-bg').trim() === '#0a0e17';
+    if (isDark) {
       document.body.style.setProperty('--futuristic-bg', '#f8f9fa');
       document.body.style.setProperty('--futuristic-card', '#ffffff');
       document.body.style.setProperty('--futuristic-accent', '#0d6efd');
       document.body.style.setProperty('--futuristic-secondary', '#6f42c1');
       document.body.style.color = '#212529';
-      document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(el => {
-        el.style.color = '#212529';
-      });
+      document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(el => el.style.color = '#212529');
       document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i>';
+      localStorage.setItem('theme', 'light');
     } else {
-      // Switch to dark theme
       document.body.style.setProperty('--futuristic-bg', '#0a0e17');
       document.body.style.setProperty('--futuristic-card', '#131a2d');
       document.body.style.setProperty('--futuristic-accent', '#00d4ff');
       document.body.style.setProperty('--futuristic-secondary', '#7e57c2');
       document.body.style.color = '#e9ecef';
-      document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(el => {
-        el.style.color = '#fff';
-      });
+      document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(el => el.style.color = '#fff');
       document.getElementById('themeToggle').innerHTML = '<i class="fas fa-moon"></i>';
+      localStorage.setItem('theme', 'dark');
     }
-  });
+  }
 
-  // Initialize
+  // === Event Listeners ===
   document.addEventListener('DOMContentLoaded', () => {
     loadProgress();
     renderQuizzes();
+
+    // Tools
+    document.getElementById('decConvertBtn').addEventListener('click', decConvert);
+    document.getElementById('clearConverterBtn').addEventListener('click', clearConverter);
+    document.getElementById('nextCardBtn').addEventListener('click', nextCard);
+    document.getElementById('calcSeriesParallelBtn').addEventListener('click', calcSeriesParallel);
+    document.getElementById('calcLedBtn').addEventListener('click', calcLed);
+    document.getElementById('checkBinaryBtn').addEventListener('click', checkBinary);
+    document.getElementById('printBtn').addEventListener('click', () => window.print());
+    document.getElementById('toggleCompact').addEventListener('click', () => {
+      document.body.classList.toggle('compact');
+    });
+
+    // Logic gates
+    document.getElementById('gateAnd').addEventListener('click', () => doGate('AND'));
+    document.getElementById('gateOr').addEventListener('click', () => doGate('OR'));
+    document.getElementById('gateXor').addEventListener('click', () => doGate('XOR'));
+    document.getElementById('gateNot').addEventListener('click', () => doGate('NOT'));
+
+    // Short quiz answers
+    document.getElementById('showNumAnswersBtn').addEventListener('click', showNumAnswers);
+    document.getElementById('showCircAnswersBtn').addEventListener('click', showCircAnswers);
+
+    // Theme
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+    // Initialize flashcard
+    nextCard();
   });
 </script>
 </body>
