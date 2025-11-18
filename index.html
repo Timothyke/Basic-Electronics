@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ElectroLearn – Electronics & Digital Logic</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- KaTeX for Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.body);"></script>
+
+  <style>
+    body {
+      padding-top: 70px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+    }
+    .section {
+      padding: 40px 0;
+    }
+    .diagram {
+      max-width: 100%;
+      height: auto;
+      margin: 15px 0;
+      border: 1px solid #eee;
+      border-radius: 6px;
+    }
+    .katex-display {
+      text-align: left;
+    }
+    nav .navbar-brand {
+      font-weight: bold;
+    }
+    footer {
+      background: #f8f9fa;
+      padding: 20px 0;
+      margin-top: 40px;
+    }
+    .highlight {
+      background-color: #fff3cd;
+      padding: 10px;
+      border-left: 4px solid #ffc107;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">ElectroLearn</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#basics">Basics</a></li>
+        <li class="nav-item"><a class="nav-link" href="#acdc">AC/DC</a></li>
+        <li class="nav-item"><a class="nav-link" href="#phasors">Phasors</a></li>
+        <li class="nav-item"><a class="nav-link" href="#semiconductors">Semiconductors</a></li>
+        <li class="nav-item"><a class="nav-link" href="#diodes">Diodes</a></li>
+        <li class="nav-item"><a class="nav-link" href="#numbers">Number Systems</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="bg-light text-center py-5">
+  <div class="container">
+    <h1 class="display-5 fw-bold">Welcome to ElectroLearn</h1>
+    <p class="lead">Your beginner-friendly guide to electronics and digital logic — with math, diagrams, and real-world examples.</p>
+  </div>
+</section>
+
+<!-- 1. Electrical Basics -->
+<section id="basics" class="section">
+  <div class="container">
+    <h2>1. Electrical Circuit Basics</h2>
+    <h3>Quantities & Units</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <ul>
+          <li><strong>Voltage (V)</strong>: Electrical potential, unit = volt (V)</li>
+          <li><strong>Current (I)</strong>: Flow of charge, unit = ampere (A)</li>
+          <li><strong>Resistance (R)</strong>: Opposition to current, unit = ohm (Ω)</li>
+          <li><strong>Power (P)</strong>: Energy per second, unit = watt (W)</li>
+        </ul>
+        <div class="highlight">
+          <p><strong>Ohm’s Law:</strong> <span id="ohms-law">\( V = I \cdot R \)</span><br>
+          <strong>Power Formula:</strong> \( P = V \cdot I = I^2 R = \frac{V^2}{R} \)</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <img src="https://www.electronics-tutorials.ws/wp-content/uploads/2018/05/dccircuits-dcp7.gif" alt="Simple DC Circuit" class="diagram">
+        <p class="text-muted"><em>Simple DC circuit with battery and resistor</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. AC/DC Circuits -->
+<section id="acdc" class="section bg-light">
+  <div class="container">
+    <h2>2. AC and DC Circuits</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <h3>DC (Direct Current)</h3>
+        <p>Constant voltage/current (e.g., batteries). Flows in one direction.</p>
+        <img src="https://www.allaboutcircuits.com/uploads/articles/DC-circuit-diagram.jpg" class="diagram" alt="DC Circuit">
+      </div>
+      <div class="col-md-6">
+        <h3>AC (Alternating Current)</h3>
+        <p>Voltage changes sinusoidally: \( v(t) = V_{\text{peak}} \sin(2\pi f t) \)</p>
+        <p>RMS Voltage: \( V_{\text{rms}} = \frac{V_{\text{peak}}}{\sqrt{2}} \)</p>
+        <img src="https://www.electronics-tutorials.ws/accircuits/acp1.gif" class="diagram" alt="AC Waveform">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Phasors & Impedance -->
+<section id="phasors" class="section">
+  <div class="container">
+    <h2>3. Phasor Diagrams & Impedance</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <p>A <strong>phasor</strong> is a rotating vector representing AC voltage or current.</p>
+        <p>Impedance (\(Z\)) generalizes resistance to AC circuits:</p>
+        <p>\( Z = R + jX \), where \( X = X_L - X_C \)</p>
+        <p>\( X_L = \omega L \),&nbsp; \( X_C = \frac{1}{\omega C} \),&nbsp; \( \omega = 2\pi f \)</p>
+        <p>Magnitude: \( |Z| = \sqrt{R^2 + (X_L - X_C)^2} \)</p>
+      </div>
+      <div class="col-md-6">
+        <svg width="300" height="200" viewBox="0 0 300 200" class="diagram">
+          <line x1="10" y1="100" x2="290" y2="100" stroke="black" stroke-width="1"/>
+          <line x1="150" y1="190" x2="150" y2="10" stroke="black" stroke-width="1"/>
+          <line x1="150" y1="100" x2="220" y2="60" stroke="blue" stroke-width="2" marker-end="url(#arrow)"/>
+          <text x="225" y="60" font-size="14">V (Phasor)</text>
+          <circle cx="150" cy="100" r="3" fill="red"/>
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="blue"/>
+            </marker>
+          </defs>
+        </svg>
+        <p class="text-muted"><em>Phasor diagram: voltage leads current in inductive circuits</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Semiconductors -->
+<section id="semiconductors" class="section bg-light">
+  <div class="container">
+    <h2>4. Semiconductors</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Intrinsic vs. Extrinsic</h3>
+        <p><strong>Intrinsic</strong>: Pure Si or Ge. Equal electrons and holes.</p>
+        <p><strong>Extrinsic</strong>: Doped to create charge carriers.</p>
+        <ul>
+          <li><strong>n-type</strong>: Doped with P/As → extra electrons</li>
+          <li><strong>p-type</strong>: Doped with B/Ga → extra holes</li>
+        </ul>
+        <h3>Electron Breakdown</h3>
+        <p>At high reverse voltage, electrons gain energy → avalanche or Zener breakdown.</p>
+      </div>
+      <div class="col-md-6">
+        <img src="https://www.electronics-tutorials.ws/wp-content/uploads/2018/05/diode-diag5.gif" class="diagram" alt="Doped Semiconductors">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Diodes -->
+<section id="diodes" class="section">
+  <div class="container">
+    <h2>5. PN Junctions & Diodes</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <p>Formed by joining p-type and n-type materials.</p>
+        <p><strong>Forward Bias</strong>: \( V > 0.7\,\text{V} \) (Si) → current flows.</p>
+        <p><strong>Reverse Bias</strong>: Small leakage current until breakdown.</p>
+        <p>Diode equation: \( I = I_s \left( e^{\frac{V}{nV_T}} - 1 \right) \)</p>
+        <div class="highlight">
+          <p>✅ <strong>Note</strong>: PNP and NPN are <em>transistors</em>, not diodes. A diode is simply a PN junction.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <img src="https://www.electronics-tutorials.ws/wp-content/uploads/2018/05/diode-dc5.gif" class="diagram" alt="Diode I-V Curve">
+        <p class="text-muted"><em>Typical silicon diode I-V characteristic</em></p>
+        <div class="d-flex flex-wrap">
+          <img src="https://www.electronics-notes.com/images/diode-1N4148-structure-01.svg" width="100" class="m-2" alt="1N4148">
+          <img src="https://www.electronics-notes.com/images/diode-1N4007-symbol-01.svg" width="100" class="m-2" alt="1N4007">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Number Systems -->
+<section id="numbers" class="section bg-light">
+  <div class="container">
+    <h2>6. Number Systems & Boolean Algebra</h2>
+
+    <h3>Binary & Decimal</h3>
+    <p>Example: \( 1101_2 = 1\cdot2^3 + 1\cdot2^2 + 0\cdot2^1 + 1\cdot2^0 = 13_{10} \)</p>
+
+    <h3>Gray Code</h3>
+    <p>Gray code changes only one bit between consecutive values (used in encoders).</p>
+    <table class="table table-bordered table-sm mt-2">
+      <thead><tr><th>Decimal</th><th>Binary</th><th>Gray</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>000</td><td>000</td></tr>
+        <tr><td>1</td><td>001</td><td>001</td></tr>
+        <tr><td>2</td><td>010</td><td>011</td></tr>
+        <tr><td>3</td><td>011</td><td>010</td></tr>
+        <tr><td>4</td><td>100</td><td>110</td></tr>
+      </tbody>
+    </table>
+    <p>Conversion: \( G = B \oplus (B >> 1) \)</p>
+
+    <h3>Boolean Algebra</h3>
+    <p>Basic operations:</p>
+    <ul>
+      <li>AND: \( A \cdot B \) or \( AB \)</li>
+      <li>OR: \( A + B \)</li>
+      <li>NOT: \( \overline{A} \)</li>
+    </ul>
+    <p>Example simplification:<br>
+    \( A + A \cdot B = A(1 + B) = A \cdot 1 = A \)</p>
+
+    <div class="text-center mt-3">
+      <img src="https://www.electronics-tutorials.ws/wp-content/uploads/2018/05/digital-dig25.gif" class="diagram" alt="Logic Gates" width="400">
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container text-center">
+    <p>© 2025 ElectroLearn – Made for aspiring electronics learners.</p>
+    <p>All images are for educational use from public domain or electronics-tutorials.ws.</p>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Auto-render KaTeX on page load
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\(", right: "\\)", display: false},
+        {left: "\\[", right: "\\]", display: true}
+      ]
+    });
+  });
+</script>
+
+</body>
+</html>
